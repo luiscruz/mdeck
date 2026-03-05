@@ -15,3 +15,5 @@ build/
 
 # Generated output
 *.pdf
+CLAUDE.md
+slides.md
