@@ -4,7 +4,7 @@ from unittest.mock import MagicMock, patch
 import pytest
 from click.testing import CliRunner
 
-from markdeck.cli import THEMES_DIR, cli
+from mdeck.cli import THEMES_DIR, cli
 
 
 @pytest.fixture
@@ -17,8 +17,8 @@ def invoke(runner, args, meta=None, returncode=0):
     mock_post = MagicMock()
     mock_post.metadata = meta or {}
 
-    with patch("markdeck.cli.frontmatter.load", return_value=mock_post), \
-         patch("markdeck.cli.subprocess.run", return_value=MagicMock(returncode=returncode)) as mock_run, \
+    with patch("mdeck.cli.frontmatter.load", return_value=mock_post), \
+         patch("mdeck.cli.subprocess.run", return_value=MagicMock(returncode=returncode)) as mock_run, \
          runner.isolated_filesystem():
         Path("slides.md").write_text("# Hello")
         result = runner.invoke(cli, ["slides.md"] + args)
@@ -137,7 +137,7 @@ def test_themes_dir_exists_and_has_sty_files():
 # --- dependency checks ---
 
 def test_missing_pandoc(runner):
-    with patch("markdeck.cli.shutil.which", side_effect=lambda cmd: None if cmd == "pandoc" else "/usr/bin/cmd"):
+    with patch("mdeck.cli.shutil.which", side_effect=lambda cmd: None if cmd == "pandoc" else "/usr/bin/cmd"):
         result, _ = invoke(runner, [])
     assert result.exit_code != 0
     assert "pandoc" in result.output
@@ -145,7 +145,7 @@ def test_missing_pandoc(runner):
 
 
 def test_missing_pdf_engine(runner):
-    with patch("markdeck.cli.shutil.which", side_effect=lambda cmd: None if cmd == "lualatex" else "/usr/bin/cmd"):
+    with patch("mdeck.cli.shutil.which", side_effect=lambda cmd: None if cmd == "lualatex" else "/usr/bin/cmd"):
         result, _ = invoke(runner, [])
     assert result.exit_code != 0
     assert "lualatex" in result.output
@@ -153,7 +153,7 @@ def test_missing_pdf_engine(runner):
 
 
 def test_missing_custom_engine(runner):
-    with patch("markdeck.cli.shutil.which", side_effect=lambda cmd: None if cmd == "pdflatex" else "/usr/bin/cmd"):
+    with patch("mdeck.cli.shutil.which", side_effect=lambda cmd: None if cmd == "pdflatex" else "/usr/bin/cmd"):
         result, _ = invoke(runner, ["--pdf-engine", "pdflatex"])
     assert result.exit_code != 0
     assert "pdflatex" in result.output

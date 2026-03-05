@@ -1,11 +1,11 @@
-# markdeck
+# mdeck
 
 **Beautiful PDF slide decks from Markdown.** No LaTeX knowledge required.
 
 Write your talk in plain Markdown, run one command, get a professional-looking presentation — powered by [Beamer](https://ctan.org/pkg/beamer) and the [Metropolis](https://github.com/matze/mtheme) theme, which is bundled so you don't have to install anything extra.
 
 ```sh
-markdeck talk.md --open
+mdeck talk.md --open
 ```
 
 ---
@@ -19,10 +19,10 @@ brew install pandoc
 brew install --cask mactex   # or any TeX distribution with LuaLaTeX
 ```
 
-**2. Install markdeck**
+**2. Install mdeck**
 
 ```sh
-pipx install markdeck
+pipx install mdeck
 ```
 
 **3. Write your talk**
@@ -52,7 +52,7 @@ Lorem ipsum.
 **4. Build**
 
 ```sh
-markdeck talk.md --open
+mdeck talk.md --open
 ```
 
 That's it. No `\begin{frame}`, no preamble, no `.cls` files to hunt down.
@@ -61,7 +61,7 @@ That's it. No `\begin{frame}`, no preamble, no `.cls` files to hunt down.
 
 ## How it works
 
-Each `# Heading` in your Markdown becomes a slide. Everything else is standard Markdown: bullet lists, bold, italics, code blocks, images. Under the hood, markdeck calls pandoc with the right flags so you never have to.
+Each `# Heading` in your Markdown becomes a slide. Everything else is standard Markdown: bullet lists, bold, italics, code blocks, images. Under the hood, mdeck calls pandoc with the right flags so you never have to.
 
 ---
 
@@ -82,7 +82,7 @@ Options can go in the file's YAML frontmatter, on the command line, or both. **C
 ### CLI
 
 ```
-markdeck [OPTIONS] FILE
+mdeck [OPTIONS] FILE
 
   -o, --output PATH               Output PDF path  (default: FILE.pdf)
   --theme TEXT                    Beamer theme
